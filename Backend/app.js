@@ -61,7 +61,7 @@ app.get('/end', (req, res) => {
 let activeUser = [];
 const { updateSocketId , updateStatus } = require('./controller/Socket.js');
 const { verifyTokenForSocket } = require('./middlewear/Auth.js');
-const user = require('./models/user.js');
+const user = require('./models/User.js');
 const Msg = require('./models/Msg.js');
 
 io.on("connection", async (socket) => {
