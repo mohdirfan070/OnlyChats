@@ -1,0 +1,30 @@
+
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('assets/fonts/Raleway/static/Raleway-Regular.ttf') format('woff2')  ;
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('assets/fonts/Lato/Lato-Regular.ttf') format('woff2')  ;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@theme{
+    --color-prime: #072227;
+    --color-second:#35858B;
+    --color-third:#35858B;
+    --color-fourth:#A3D1C6;
+    --color-fifth:#48A6A7;
+    --color-backform:#ECEBF3;
+    --color-frontform:#E8F1F2;
+    --color-btn-primary:#3943B7;
+    --font-lato:"Lato"
+}
+

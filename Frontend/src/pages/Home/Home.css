@@ -1,0 +1,21 @@
+*{
+    transition: color 0.2s ease;
+}
+
+/* @media (max-width:840px) {
+        .chat-compo{
+            display: none;
+        }
+        #user-list{
+            width: 100vw;
+        }
+} */
+
+@media (max-width:840px) {
+    /* .chat-compo{
+        width: 100vw;
+    } 
+    #user-list{
+       transform: translateX(10%);
+    } */
+}

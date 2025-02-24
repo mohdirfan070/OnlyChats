@@ -1,0 +1,145 @@
+
+Frontend
+
+1. App 
+
+1.1: App starts
+
+	As our App Compo renders, first it checks whether the user is a Authorized and Authenticated user or not, if not then it'll redirect him to login page/signup page
+
+1.1.1: Login
+
+	If login succeeded then the useSocket will make a WS connection in useSocket Hook which is rendered in App Compo and forward the "socket" Obj which is then used by the useChatContext for fetching the necessary data as like 
+1. Profile Picture
+2. Friends
+3. Each Friend Last Messege with status
+4. Who is Online?
+
+
+1.1.2 : Sign Up
+	
+	If  Sign Up is done then the JWT token is stored in cookie and WS connection is established in useSocket Hook	
+
+
+	
+1.1.3 : Libraries
+
+1. react-router-dom
+2. react-hook-form
+3. react-toastify
+4. 
+
+
+
+
+
+
+
+2. Contexts
+
+2.1: Chats
+	
+2.1.1:useChatContext() :
+	 In this context we first begin with a socket connection that is been already made in useSocket Hook Component and established Connection in <App> component 
+
+Then, we must fetch the following:
+1. User Profile Picture.
+2. Friends.
+3. Each Friend Last Message with status.
+4. Who is Online?
+
+Then these data sets are stored in the states accordingly (because we it's a webApp so we are using states ) and stored efficiently using useMemo Hook and if the user refreshes the app all data is wiped out and again the process gets restarted.
+
+2.1.2 How the data is Stored?
+
+{
+  "users": {
+    "userId1": {
+      "token": "user1_token",
+      "profilePicLink": "/images/user1.jpg",
+      "name": "User One",
+      "username": "user1",
+      "friends": ["friendId1", "friendId2"],
+      "lastMessages": {
+        "friendId1": {
+          "message": "Hey there!",
+          "status": "read",
+          "timestamp": 1618300000000
+        },
+        "friendId2": {
+          "message": "Good morning",
+          "status": "unread",
+          "timestamp": 1618320000000
+        }
+      },
+      "onlineStatus": "online"
+    },
+    "userId2": {
+      "token": "user2_token",
+      "profilePicLink": "/images/user2.png",
+      "name": "User Two",
+      "username": "user2",
+      "friends": ["friendId1"],
+      "lastMessages": {
+        "friendId1": {
+          "message": "See you later",
+          "status": "unread",
+          "timestamp": 1618300000000
+        }
+      },
+      "onlineStatus": "offline"
+    }
+  }
+}
+
+
+{
+  "friends": {
+    "friendId1": {
+      "name": "Friend One",
+      "username": "friend1",
+      "socketId": "socket1",
+      "profilePicLink": "/images/friend1.jpg",
+      "messages": [
+        {
+          "message": "Hello!",
+          "timestamp": 1618300000000,
+          "status": "read"
+        },
+        {
+          "message": "How are you?",
+          "timestamp": 1618320000000,
+          "status": "read"
+        }
+      ],
+      "onlineStatus": "online"
+    },
+
+    "friendId2": {
+      "name": "Friend Two",
+      "username": "friend2",
+      "socketId": "socket2",
+      "profilePicLink": "/images/friend2.png",
+      "messages": [
+        {
+          "message": "Good evening",
+          "timestamp": 1618300000000,
+          "status": "unread"
+        }
+      ],
+      "onlineStatus": "offline"
+    }
+  }
+}
+
+2.1.3 Using useMemo every time when a new message is received or sent to not to rerender or recalculate the message list everytime 
+
+
+
+
+
+##Contruction of App
+
+1:Build Contexts
+
+2:UI with functionalities
