@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // Cross Origin Setup
 // CORS for HTTP
 const cors = require('cors');
-app.use(cors({ origin:[ 'http://localhost:5173'  , '*'], credentials: true, methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], httpOnly: true }));
+app.use(cors({ origin:[ 'http://localhost:5173'  , '*' , process.env.FRONTEND_URL], credentials: true, methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], httpOnly: true }));
 
 
 // Creating a Socket Server
