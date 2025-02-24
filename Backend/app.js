@@ -22,7 +22,7 @@ app.use(cors({ origin:[ 'http://localhost:5173'  , '*'], credentials: true, meth
 // Creating a Socket Server
 const io = new Server(server, {
     cors: {
-        origin: ["*", "http://localhost:5173"],
+        origin: ["*", "http://localhost:5173" , process.env.FRONTEND_URL],
         credentials: true,
         methods: ["POST", "GET"],
     }
