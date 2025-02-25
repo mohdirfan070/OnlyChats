@@ -127,19 +127,20 @@ useEffect(() => {
                 <li
                   className="flex items-end text-[2.5vh] p-[0.5vh] rounded-[0.5vh] bg-frontform shadow px-[0.5vw]   m-[0.51vh] max-w-min"
                   key={index}
-                ><pre   className="text-wrap max-w-[85%]"    name="" id="">
+                ><pre   className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"    name="" id="">
                   {message.text}
                 </pre>
-                 <span className="pl-[0.5vh] text-[1.7vh] text-blue-500 text-nowrap " >{ new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true}) }</span>
+                
+                 <span className="pl-[0.5vh] text-[1.7vh] text-blue-500 text-nowrap " >{ new Date(message.createdAt).getHours() > 12 ? new Date(message.createdAt).getHours() - 12+":"+new Date(message.createdAt).getMinutes()+"pm" : new Date(message.createdAt).getHours()+":"+new Date(message.createdAt).getMinutes()+"am" }</span>
                 </li>
               ) :  (
                 <li
                   className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max"
                   key={index}
                 >
-                  <pre className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap" readOnly  rows={message.text.split("\n").length}  name="" id="">
+                  <pre className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"   rows={message.text.split("\n").length}  name="" id="">
                   {message.text}
-                </pre> <span className="pl-[0.5vh] text-[1.7vh] text-blue-300" >{  new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true})}</span>
+                </pre> <span className="pl-[0.5vh] text-[1.7vh] text-blue-300 text-nowrap " >{ new Date(message.createdAt).getHours() > 12 ? new Date(message.createdAt).getHours() - 12+":"+new Date(message.createdAt).getMinutes()+"pm" : new Date(message.createdAt).getHours()+":"+new Date(message.createdAt).getMinutes()+"am" }</span>
                   <span>
                     {message.status == "read" ? (
                       <>
