@@ -104,7 +104,7 @@ useEffect(() => {
       >
         <div className="  w-full rounded-b-[1.3vh] bg-second flex items-center p-[0.82vw]">
          
-         <button className="mx-[1vw]" onClick={()=>setToggle(true)} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ECEBF3" class="bi bi-arrow-return-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/></svg>
+         <button className="mx-[1vw]" onClick={()=>setToggle(true)} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ECEBF3" className="bi bi-arrow-return-left" viewBox="0 0 16 16"> <path fillRule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/></svg>
 </button>
 
            <img
@@ -127,17 +127,17 @@ useEffect(() => {
                 <li
                   className="flex items-end text-[2.5vh] p-[0.5vh] rounded-[0.5vh] bg-frontform shadow px-[0.5vw]   m-[0.51vh] max-w-min"
                   key={index}
-                ><pre   className="outline-none resize-none "    name="" id="">
+                ><pre   className="text-wrap max-w-[85%]"    name="" id="">
                   {message.text}
                 </pre>
-                 <span className="pl-[0.5vh] text-[1.7vh] text-blue-500 text-nowrap" >{ new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true}) }</span>
+                 <span className="pl-[0.5vh] text-[1.7vh] text-blue-500 text-nowrap " >{ new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true}) }</span>
                 </li>
               ) :  (
                 <li
                   className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max"
                   key={index}
                 >
-                  <pre className="resize-none outline-none w-max " readOnly  rows={message.text.split("\n").length}  name="" id="">
+                  <pre className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap" readOnly  rows={message.text.split("\n").length}  name="" id="">
                   {message.text}
                 </pre> <span className="pl-[0.5vh] text-[1.7vh] text-blue-300" >{  new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true})}</span>
                   <span>
