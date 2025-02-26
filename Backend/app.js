@@ -114,18 +114,26 @@ io.on("connection", async (socket) => {
 
         // Fetching All Users
         // const users = await user.find({}).select('name email username profilePicture socketId isOnline updatedAt');
-        io.to(socket.id).emit("all-active-users", users);
+        // io.to(socket.id).emit("all-active-users", users);
+            io.emit("all-active-users", users);
     });
 
     // io.emit("hii");
     
     socket.on("fetch-chats", async (data) => {
       try {
+        // let page = data.page;
+        // let skip =( page-1 )*60;
         // console.log(data);
+        // const chats = await Msg.find({$or:[
+        //     {username:data.username , sendTo:data.sendTo},
+        //     {username:data.sendTo , sendTo:data.username},
+        // ]}).skip(skip).limit(60);
+
         const chats = await Msg.find({$or:[
             {username:data.username , sendTo:data.sendTo},
             {username:data.sendTo , sendTo:data.username},
-        ]});
+        ]})
 
         // console.log(chats);
         socket.emit("current-user-chats",  chats ); // Emit the chats back to the client
@@ -172,6 +180,9 @@ io.on("connection", async (socket) => {
     socket.on("disconnect",async () => {
         activeUser = activeUser.filter(user => user.socketId != socket.id);
         await updateStatus({ socketId : socket.id  , status : false });
+        
+        const users = await user.find({isOnline:true}).select('name email username profilePicture socketId isOnline updatedAt');
+            io.emit("all-active-users", users);
         // console.log(activeUser)
     });
 });

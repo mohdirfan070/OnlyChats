@@ -5,11 +5,13 @@ import { useCurrentChatUser } from "../../contexts/Chats/CurrentChatUser";
 import { useAuthContext } from "../../contexts/AuthContext";
 import EmojiPicker from "emoji-picker-react";
 import { useToggleContext } from "../../pages/Home/Home";
+import Messeges from "./Messeges";
 
-const fetchChats = async (socketInstance, currentChatUser, userEmail) => {
+const fetchChats = async (socketInstance, currentChatUser, userEmail, page) => {
   socketInstance.emit("fetch-chats", {
     sendTo: currentChatUser,
     username: userEmail,
+    page,
   });
 };
 
@@ -21,6 +23,11 @@ export default function ChatItem(props) {
   const [msg, setMsg] = useState("");
   const chatList = useRef(null);
   const { toggle, setToggle } = useToggleContext();
+  const [page, setPage] = useState(0);
+  const [reply , setReply ] = useState({});
+
+
+
 
   const handleMessage = async () => {
     if (socketInstance && currentChatUser.email) {
@@ -38,7 +45,7 @@ export default function ChatItem(props) {
   useEffect(() => {
     const fetchData = async (data) => {
       if (socketInstance && currentChatUser.email) {
-        await fetchChats(socketInstance, currentChatUser.email, data);
+        await fetchChats(socketInstance, currentChatUser.email, data, page);
       }
     };
     fetchData(props.user.email);
@@ -95,6 +102,11 @@ export default function ChatItem(props) {
     }
   }, [allMsg]);
 
+
+
+
+
+
   if (currentChatUser && currentChatUser.name) {
     return (
       <section
@@ -139,62 +151,13 @@ export default function ChatItem(props) {
             allMsg.map((message, index) =>
               message.username == currentChatUser.email &&
               message.sendTo == props.user.email ? (
-                <li
-                  key={index}
-                  className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50. shadow px-[0.5vw]   self-start bg-frontform rounded-[0.5vh] m-[0.51vh] w-max"
-                >
-                  <pre
-                    className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"
-                    name=""
-                    id=""
-                  >
-                    {message.text}
-                  </pre>
-                  <span className="pl-[0.5vh] text-[1.7vh] text-blue-500 text-nowrap ">
-                  {new Date(message.createdAt).toLocaleTimeString().split(":")[0]+":"+new Date(message.createdAt).toLocaleTimeString().split(":")[1]+new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true}).split(" ")[1] }
-                  </span>
-                </li>
+                <>
+              <Messeges  isMine={false} prop={{message , index , reply , setReply}} />
+                </>
               ) : (
-                <li
-                  className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max"
-                  key={index}
-                >
-                  <pre
-                    className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"
-                    name=""
-                    id=""
-                  >
-                    {message.text}
-                  </pre>{" "}
-                  <span className="pl-[0.5vh] text-[1.7vh] text-blue-300 text-nowrap ">
-                    {new Date(message.createdAt).toLocaleTimeString().split(":")[0]+":"+new Date(message.createdAt).toLocaleTimeString().split(":")[1]+new Date(message.createdAt).toLocaleTimeString('en-US',{hour12:true}).split(" ")[1] }
-                  </span>
-                  <span>
-                    {message.status == "read" ? (
-                      <>
-                        <svg
-                          className="h-[2.1vh] w-[2.1vw] text-blue-200"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M1 12.5L5.5 17L11 9.5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                          <path
-                            d="M8.5 15L12 18.5L22 6.5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </>
-                    ) : (
-                      " "
-                    )}
-                  </span>{" "}
-                </li>
+                <>
+                <Messeges  isMine={true} prop={{message , index , reply , setReply}} />
+                </>
               )
             )}
         </ul>
@@ -202,9 +165,11 @@ export default function ChatItem(props) {
         <div className="absolute bottom-0 overflow-auto min-w-full pl-[1vh] pr-[2.5vh] py-[1vh] ">
           {/* <TypeMsg msgData={{setAllMsg , currentChatUser , allMsg  , user }}  /> */}
 
+            <pre>{reply ? <p>{reply.text}</p> : "" }</pre>
+
           <div
             id="typeMsg"
-            className={`sticky bottom-0   right-0 flex  screen  rounded-[0.5vh]  border-[0.08vh] border-prime :hover:border hover:border-[1px] hover:border-second bg-white min-h-[8vh] overflow-hidden min-w-full max-h-[2vh]`}
+            className={` sticky bottom-0   right-0 flex   justify-between  rounded-[0.5vh]  border-[0.08vh] border-primebg-white min-h-[8vh] overflow-hidden min-w-full max-h-[2vh]`}
           >
             <textarea
               autoFocus
@@ -213,14 +178,17 @@ export default function ChatItem(props) {
               value={msg}
               rows={1}
               placeholder="Type messege "
-              className={` min-w-[80%] resize-none bg-frontform  caret-blue-800  p-[2vh] text-[3vh] outline-none rounded-[0.5vh]  `}
+              className={` min-w-full resize-none bg-frontform  caret-blue-800 px-[2vh] py-[1.6vh] pr-[9vh] text-[3vh] outline-none rounded-[0.5vh]  `}
             />
 
             <button
-              onClick={handleMessage}
-              className=" w-[20%]  z-20 active:bg-fourth hover:bg-fourth bg-second px-[3vh]  text-white font-extrabold text-[3vh] rounded-r-[0.5vh] "
+              // onClick={handleMessage}
+              className="absolute right-[0vh] p-[3vh] w-min  z-20 active:bg-prime hover:bg-third bg-second   text-white font-extrabold text-[3vh] rounded-r-[0.5vh] "
             >
-              {">"}
+              <svg   xmlns="http://www.w3.org/2000/svg"  width="3vw"
+              height="2vh"fill="currentColor" className="bi bi-send" viewBox="0 0 16 16">
+  <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+</svg>
             </button>
           </div>
         </div>

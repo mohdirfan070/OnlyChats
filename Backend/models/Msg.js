@@ -22,6 +22,11 @@ const msgSchema = new mongoose.Schema({
     seenBy:{
         type:Array,
         default: []
+    },
+    reply:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref:'Msg',
+        default:null
     }
 }, {
     timestamps: true,
