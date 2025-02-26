@@ -182,7 +182,7 @@ export default function ChatItem(props) {
             />
 
             <button
-              // onClick={handleMessage}
+              onClick={handleMessage}
               className="absolute right-[0vh] p-[3vh] w-min  z-20 active:bg-prime hover:bg-third bg-second   text-white font-extrabold text-[3vh] rounded-r-[0.5vh] "
             >
               <svg   xmlns="http://www.w3.org/2000/svg"  width="3vw"
