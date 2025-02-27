@@ -24,8 +24,8 @@ const msgSchema = new mongoose.Schema({
         default: []
     },
     reply:{
-        type :String,
-        default :""
+        type :Object,
+        default :{ sender : "" , receiver : "" , text :"" }
     }
 }, {
     timestamps: true,

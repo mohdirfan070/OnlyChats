@@ -147,7 +147,7 @@ io.on("connection", async (socket) => {
         try {
             // console.log(data.socketId);
             const { reply , text, username, sendTo } = data;
-           const newMsg = await Msg.insertMany([{ text, username, sendTo, status: "sent" , reply }]);
+           const newMsg = await Msg.insertMany([{ text, username, sendTo, status: "sent" , reply:{sender: reply.sender || "",receiver:reply.receiver || "", text:reply.text || ""}}]);
             // console.log(newMsg);     
             
             //Getting both SocketId
