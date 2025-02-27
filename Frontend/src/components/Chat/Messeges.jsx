@@ -5,7 +5,7 @@ export default function Messeges({ prop, isMine , data}) {
   const { currentChatUser , props }= data;
   return isMine ? (
     <li
-    onClick={() => setReply({text:message.text})}
+    onClick={() => setReply({...message,text:message.text})}
       key={index}
       className={
         "flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max hover:cursor-pointer"
@@ -57,7 +57,7 @@ export default function Messeges({ prop, isMine , data}) {
     </li>
   ) : (
     <li
-    onClick={() => setReply({text:message.text})}
+    onClick={() => setReply({...message,text:message.text})}
       key={index}
       className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50. shadow px-[0.5vw]   self-start bg-frontform rounded-[0.5vh] m-[0.51vh] w-max  hover:cursor-pointer"
     >
