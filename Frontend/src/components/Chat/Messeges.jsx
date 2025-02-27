@@ -11,8 +11,7 @@ export default function Messeges({ prop, isMine , data}) {
         "flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max hover:cursor-pointer"
       }
     >
-      <div>
-      {message && message.reply ? (
+       <div>{message && message.reply && message.reply.text ? (
         <>
          <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-[0.82vh]">
             <pre className="break-words whitespace-pre-wrap text-second p-[0.4vh] rounded-[0.3vh] bg-white">
@@ -34,6 +33,7 @@ export default function Messeges({ prop, isMine , data}) {
       ) : (
         <></>
       )}
+
       <pre
         className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"
         name=""
@@ -62,8 +62,7 @@ export default function Messeges({ prop, isMine , data}) {
       className=" flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50. shadow px-[0.5vw]   self-start bg-frontform rounded-[0.5vh] m-[0.51vh] w-max  hover:cursor-pointer"
     >
       
-      <div>
-      {message && message.reply  ? (
+      <div>{message && message.reply && message.reply.text ? (
         <>
           <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-[0.82vh]">
             <pre className="break-words whitespace-pre-wrap text-white bg-second">
@@ -82,8 +81,7 @@ export default function Messeges({ prop, isMine , data}) {
         </>
       ) : (
         <></>
-      )}
-      <pre
+      )}<pre
         className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap "
         name=""
         id=""
