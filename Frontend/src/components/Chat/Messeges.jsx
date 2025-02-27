@@ -23,7 +23,7 @@ export default function Messeges({ prop, isMine , data}) {
 
          
               
-              {message && message.reply.text
+              {message && message.reply
                 ?( message.reply.text.split("").length > 35
                   ? message.reply.text.substring(0, 34) + "..."
                   : message.reply.text)
@@ -72,7 +72,7 @@ export default function Messeges({ prop, isMine , data}) {
             {/* <br /> */}
           
 
-              {message && message.reply.text
+              {message && message.reply
                 ?( message.reply.text.split("").length > 35
                 ? message.reply.text.substring(0, 34) + "..."
                 : message.reply.text
