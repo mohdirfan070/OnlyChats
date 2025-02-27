@@ -35,7 +35,7 @@ export default function ChatItem(props) {
         text: msg,
         sendTo: currentChatUser.email,
         username: props.user.email,
-        receiverSocketId: currentChatUser.socketId,
+        reply:reply.text       
       });
       setMsg("");
     }
@@ -165,7 +165,11 @@ export default function ChatItem(props) {
         <div className="absolute bottom-0 overflow-auto min-w-full pl-[1vh] pr-[2.5vh] py-[1vh] ">
           {/* <TypeMsg msgData={{setAllMsg , currentChatUser , allMsg  , user }}  /> */}
 
-            <pre>{reply ? <p>{reply.text}</p> : "" }</pre>
+            {reply.text ?<>
+              <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-t-[2vh]" >  <section><span className="font-bold" >Reply to { reply.username == currentChatUser.email ?  currentChatUser.name :  "You" }  </span>  <br /> <pre> {reply && reply.text ? ( reply.text.split("").length > 15 ? reply.text.substring(0,14)+"..." : reply.text ) : "" } </pre></section> <button  onClick={()=>setReply({})}  className="self-end text-gray-50 bg-fifth w-[3.2vh] h-[3.5vh] rounded-[0.71vh] p-[0.5vh] hover:outline-[0.1vh] " ><svg  xmlns="http://www.w3.org/2000/svg" width="2.3vh" height="2.3vh" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+</svg> </button> </div> 
+            </>: <></> }
 
           <div
             id="typeMsg"
@@ -183,10 +187,10 @@ export default function ChatItem(props) {
 
             <button
               onClick={handleMessage}
-              className="absolute right-[0vh] p-[3vh] w-min  z-20 active:bg-prime hover:bg-third bg-second   text-white font-extrabold text-[3vh] rounded-r-[0.5vh] "
+              className="absolute right-[0vh] p-[3vh] pt-[2.5vh] w-min  z-20 active:bg-prime hover:bg-third bg-second   text-white font-extrabold text-[3vh] rounded-r-[0.5vh]  hover:"
             >
-              <svg   xmlns="http://www.w3.org/2000/svg"  width="3vw"
-              height="2vh"fill="currentColor" className="bi bi-send" viewBox="0 0 16 16">
+              <svg style={{rotate:"45deg"}} xmlns="http://www.w3.org/2000/svg"  width="3vh"
+              height="3vh"fill="currentColor" className="bi bi-send" viewBox="0 0 16 16">
   <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
 </svg>
             </button>

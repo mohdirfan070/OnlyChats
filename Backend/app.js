@@ -133,7 +133,7 @@ io.on("connection", async (socket) => {
         const chats = await Msg.find({$or:[
             {username:data.username , sendTo:data.sendTo},
             {username:data.sendTo , sendTo:data.username},
-        ]})
+        ]});
 
         // console.log(chats);
         socket.emit("current-user-chats",  chats ); // Emit the chats back to the client
@@ -142,12 +142,12 @@ io.on("connection", async (socket) => {
       }
     });
 
-
+    // New Messages
     socket.on("sent-msg", async (data) => {
         try {
             // console.log(data.socketId);
-            const { text, username, sendTo, receiverSocketId } = data;
-           const newMsg = await Msg.insertMany([{ text, username, sendTo, status: "sent" }]);
+            const { reply , text, username, sendTo } = data;
+           const newMsg = await Msg.insertMany([{ text, username, sendTo, status: "sent" , reply }]);
             // console.log(newMsg);     
             
             //Getting both SocketId
@@ -164,6 +164,18 @@ io.on("connection", async (socket) => {
     });
     
     
+    // Reply to a message
+    socket.on("reply-to-a-message",async(data)=>{
+        try {
+            const { repliedTo , text, username, sendTo  } = data;
+            const newMsg = await Msg.insertMany([{ text, username, sendTo, status: "sent" }]);
+            let sendedTo = await user.findOne({email:sendTo}).select('name username socketId email');
+            io.to([socket.id,sendedTo.socketId]).emit("new-msg",{newMsg:newMsg[0],user:sendedTo});
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
 
     // socket.on("msg", (msg) => {
     //     console.log(msg);

@@ -5,6 +5,8 @@ export default function Messeges({prop , isMine}) {
   
  
   return (
+
+    
     isMine ? 
 
     <li
@@ -12,6 +14,7 @@ export default function Messeges({prop , isMine}) {
    key={index}
      className={"flex items-end text-[2.5vh]  p-[0.5vh] text-gray-50 shadow px-[0.5vw]   self-end bg-second rounded-[0.5vh] m-[0.51vh] w-max hover:cursor-pointer"}
   >    
+    
     <pre
       className="pl-[0.5vh] max-w-[70vw] h-min break-words whitespace-pre-wrap"
       name=""

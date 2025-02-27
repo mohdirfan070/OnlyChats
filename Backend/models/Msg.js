@@ -24,9 +24,8 @@ const msgSchema = new mongoose.Schema({
         default: []
     },
     reply:{
-        type : mongoose.Schema.Types.ObjectId,
-        ref:'Msg',
-        default:null
+        type :String,
+        default :""
     }
 }, {
     timestamps: true,
