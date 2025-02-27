@@ -12,7 +12,7 @@ export default function Messeges({ prop, isMine , data}) {
       }
     >
       <div>
-      {message && message.reply.text ? (
+      {message && message.reply ? (
         <>
          <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-[0.82vh]">
             <pre className="break-words whitespace-pre-wrap text-second p-[0.4vh] rounded-[0.3vh] bg-white">
@@ -63,7 +63,7 @@ export default function Messeges({ prop, isMine , data}) {
     >
       
       <div>
-      {message && message.reply.text  ? (
+      {message && message.reply  ? (
         <>
           <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-[0.82vh]">
             <pre className="break-words whitespace-pre-wrap text-white bg-second">
