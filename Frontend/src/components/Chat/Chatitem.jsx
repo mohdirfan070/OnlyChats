@@ -179,14 +179,14 @@ export default function ChatItem(props) {
               <div className="p-[1.8vh] pr-[4vh] bg-second flex justify-between items-baseline text-white rounded-t-[2vh]">
                 {" "}
                 <section>
-                  <span className="font-bold">
+                  <span className="font-bold text-[2.3vh]">
                     Reply to{" "}
                     {reply.username == currentChatUser.email
                       ? currentChatUser.name
                       : "You"}{" "}
                   </span>{" "}
                   <br />{" "}
-                  <pre className="break-words whitespace-pre-wrap">
+                  <pre className="break-words whitespace-pre-wrap text-[2.5vh]">
                     {" "}
                     {reply && reply.text
                       ? reply.text.split("").length > 25
@@ -235,7 +235,7 @@ export default function ChatItem(props) {
               className="absolute right-[0vh] p-[3vh] pt-[2.5vh] w-min  z-20 active:bg-prime hover:bg-third bg-second   text-white font-extrabold text-[3vh] rounded-r-[0.5vh]  hover:"
             >
 
-              
+
               <svg
                 style={{ rotate: "45deg" }}
                 xmlns="http://www.w3.org/2000/svg"
